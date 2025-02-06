@@ -13,18 +13,44 @@
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class="container-fluid">
-
+    <div class="container-fluid d-flex flex-column vh-100">
+        <!-- Topbar -->
         <div class="row topbar d-flex">
             <div class="col-12 text-center">
                 Content Top Bar
             </div>
         </div>
 
-        <div class="row">
-            content
-        </div>
+        <!-- Resten av Layouten -->
+        <div class="row flex-grow-1">
+            <!-- Sidebar -->
+            <div class="col-2 sidebar">
+                <h5>Cleo</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Hem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Cleo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Skapa AI-kollega</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Verktyg</a>
+                    </li>
+                </ul>
+            </div>
 
+            <!-- Main Content -->
+            <div class="col-10">
+                <div class="content">
+                    <h2>Välkommen till Cleo</h2>
+                    <p>Här kan du börja bygga ditt verktyg. Lägg till fler funktioner och anpassa efter behov.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

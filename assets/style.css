@@ -8,7 +8,7 @@ body {
 
 /* Login Form Main Layout */
 
-.col-9, .col-md-8 {
+.col-2, .col-10 {
     border: 1px solid blue;
 }
 
