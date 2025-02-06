@@ -1,10 +1,27 @@
-.col-md-4, .col-md-8 {
+/* Basic layout */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+}
+
+/* Login Form Main Layout */
+
+.col-9, .col-md-8 {
     border: 1px solid blue;
 }
 
 
 /* Dashboard Main Layout */
 
+.topbar {
+    background-color: #000;
+    color: #fff;
+    padding: 1rem;
+}
+
+/* 
 .sidebar {
     background-color: #f8f9fa;
     height: 100vh;
@@ -16,12 +33,15 @@
     margin-bottom: 1rem;
 }
 
-.topbar {
-    background-color: #000;
-    color: #fff;
-    padding: 1rem;
+
+.col-9 {
+    padding: 0px;
+    margin: 0px;
 }
 
+
 .content {
-    padding: 2rem;
+    padding: 0px;
+    margin: 0px;
 }
+
