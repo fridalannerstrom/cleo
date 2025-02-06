@@ -4,14 +4,8 @@ body {
     margin: 0px;
     padding: 0px;
     max-width: 100%;
+    background-color: #F6F6F6;
 }
-
-/* Login Form Main Layout */
-
-.col-2, .col-10 {
-    border: 1px solid blue;
-}
-
 
 /* Dashboard Main Layout */
 
@@ -19,6 +13,11 @@ body {
     background-color: #000;
     color: #fff;
     padding: 1rem;
+}
+
+.sidebar {
+    background-color: white;
+    border-right: 1px solid rgb(201, 201, 201);
 }
 
 /* 
