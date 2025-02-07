@@ -44,13 +44,26 @@
 
             <!-- Main Content -->
             <div class="col-10">
-                <div class="content">
-                    <h2>JobAd Generator</h2>
-                    <p>This is for generating a job ad</p>
-                </div>
+                <div class="container mt-5">
+                    <h1 class="text-center">Job Ad Generator</h1>
+                    <form id="jobAdForm" class="mt-4">
+                        <div class="mb-3">
+                            <label for="jobTitle" class="form-label">Job Title</label>
+                            <input type="text" class="form-control" id="jobTitle" placeholder="Enter job title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jobDescription" class="form-label">Job Description</label>
+                            <textarea class="form-control" id="jobDescription" rows="5" placeholder="Enter job description" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Generate Job Ad</button>
+                    </form>
+                    <div id="generatedAd" class="mt-5">
+                        <h3>Generated Job Ad</h3>
+                        <p id="jobAdOutput" class="p-3 bg-light"></p>
+                    </div>
             </div>
         </div>
     </div>
 </body>
-
+<script src="assets/script.js"></script>
 </html>
