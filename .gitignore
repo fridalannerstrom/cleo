@@ -8,4 +8,4 @@ node_modules/
 .github/
 cloudinary_python.txt
 key.env
-creds.jsoncreds.json
+creds.json
