@@ -8,20 +8,37 @@
 });
 */
 
-document.getElementById("jobAdForm").addEventListener("submit", async function (event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("jobAdForm").addEventListener("submit", async function(event) {
+        event.preventDefault();  // Förhindrar att formuläret laddar om sidan
 
-    const title = document.getElementById("jobTitle").value;
-    const description = document.getElementById("jobDescription").value;
+        const jobTitle = document.getElementById("jobTitle").value;
+        const jobDescription = document.getElementById("jobDescription").value;
 
-    const response = await fetch("http://127.0.0.1:8000/jobad-generator.html", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ title, description }),
+        if (!jobTitle || !jobDescription) {
+            alert("Please fill in both Job Title and Job Description.");
+            return;
+        }
+
+        try {
+            const response = await fetch("/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ jobTitle, jobDescription })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                document.getElementById("generatedJobAd").innerText = result.jobAd;
+            } else {
+                document.getElementById("generatedJobAd").innerText = "Error: " + result.error;
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            document.getElementById("generatedJobAd").innerText = "Failed to fetch response.";
+        }
     });
-
-    const data = await response.json();
-    document.getElementById("jobAdOutput").innerText = data.generatedText || "Something went wrong.";
 });
