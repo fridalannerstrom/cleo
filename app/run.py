@@ -5,10 +5,8 @@ import os
 
 app = Flask(__name__)
 
-# Läs in API-nyckeln från creds.json
-with open("creds.json") as f:
-    creds = json.load(f)
-    openai.api_key = creds.get("openai_api_key")
+# Läs in API-nyckeln från miljövariabel istället för creds.json
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/')
 def index():
