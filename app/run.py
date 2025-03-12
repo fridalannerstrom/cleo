@@ -11,7 +11,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/')
 def index():
-    return render_template('jobad-generator.html')
+    return render_template('/jobad-generator.html')
 
 @app.route('/generate', methods=['POST'])
 def generate_job_ad():
