@@ -25,14 +25,15 @@ def generate_job_ad():
     prompt = f"Create a professional job ad for the position: {job_title}. Description: {job_description}"
 
     try:
-        response = openai.ChatCompletion.create(
+        client = openai.OpenAI()  # Ny syntax för openai >1.0
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=[
                 {"role": "system", "content": "You are an AI specialized in writing professional job ads."},
                 {"role": "user", "content": prompt}
             ]
         )
-        job_ad = response["choices"][0]["message"]["content"]
+        job_ad = response.choices[0].message.content  # Nytt sätt att hämta svaret
         return jsonify({"jobAd": job_ad})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
