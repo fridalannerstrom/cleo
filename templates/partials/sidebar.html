@@ -2,13 +2,10 @@
     <h5>Navigation</h5>
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link active" href="{{ url_for('dashboard') }}">Home</a>
+            <a href="{{ url_for('show_page', page='dashboard') }}">Dashboard</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('jobad_generator') }}">JobAd Generator</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Compare Candidates</a>
+            <a href="{{ url_for('show_page', page='jobad-generator') }}">Jobad Generator</a>
         </li>
     </ul>
 </div>

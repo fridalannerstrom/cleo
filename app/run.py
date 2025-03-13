@@ -11,19 +11,16 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/')
 def index():
-    return render_template('index.html')  # Starta på dashboard
+    return render_template('index.html')  # Starta på index
 
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
+@app.route('/<page>')
+def show_page(page):
+    template_path = f"templates/{page}.html"
 
-@app.route('/jobad-generator')
-def jobad_generator():
-    return render_template('jobad-generator.html')
-
-@app.route('/upload-candidates')
-def upload_candidates():
-    return render_template('upload-candidates.html')
+    if os.path.exists(template_path):  # Kontrollera om sidan finns
+        return render_template(f"{page}.html")
+    else:
+        return "Sidan finns inte", 404
 
 @app.route('/generate', methods=['POST'])
 def generate_job_ad():
