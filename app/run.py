@@ -11,7 +11,19 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/')
 def index():
-    return render_template('/jobad-generator.html')
+    return render_template('index.html')  # Starta på dashboard
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/jobad-generator')
+def jobad_generator():
+    return render_template('jobad-generator.html')
+
+@app.route('/upload-candidates')
+def upload_candidates():
+    return render_template('upload-candidates.html')
 
 @app.route('/generate', methods=['POST'])
 def generate_job_ad():
@@ -39,4 +51,4 @@ def generate_job_ad():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=10000)
+    app.run(debug=True, host="0.0.0.0", port=10000)
