@@ -7,5 +7,9 @@
             <div class="container mt-5">
                 <h1>Upload Candidates</h1>
                 <p>Upload Candidates container</p>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <button type="submit">Upload</button>
+                </form>
             </div>
 {% endblock %}

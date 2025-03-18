@@ -1,51 +1,26 @@
-import json
 import os
-from flask import Flask, request, jsonify, render_template
-import openai
+from flask import Flask, render_template
+from config import Config
+from routes.main_routes import main_routes
+from routes.ai_routes import ai_routes
 
-# Skapa Flask-app och peka på templates-mappen (i root)
+print(f"✅ Flask letar efter templates i: {os.path.abspath('../cleo/templates')}")
+print(f"Flask letar efter templates i: {os.path.abspath('templates')}")
+
+# Skapa Flask-applikationen
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
+app.config.from_object(Config)  # Laddar in konfigurationen
 
-# Läs in API-nyckeln från miljövariabel
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Registrera Blueprints
+app.register_blueprint(main_routes)
+app.register_blueprint(ai_routes, url_prefix="/api")  # Prefix för API-rutter
 
-@app.route('/')
-def index():
-    return render_template('index.html')  # Starta på index
+print("📌 Registrerade Blueprints:", app.blueprints)
 
-@app.route('/<page>')
-def show_page(page):
-    template_path = f"templates/{page}.html"
+@app.route('/test-template')
+def test_template():
+    return render_template('index.html')
 
-    if os.path.exists(template_path):  # Kontrollera om sidan finns
-        return render_template(f"{page}.html")
-    else:
-        return "Sidan finns inte", 404
-
-@app.route('/generate', methods=['POST'])
-def generate_job_ad():
-    data = request.get_json()
-    job_title = data.get("jobTitle")
-    job_description = data.get("jobDescription")
-
-    if not job_title or not job_description:
-        return jsonify({"error": "Job title and description are required"}), 400
-
-    prompt = f"Create a professional job ad for the position: {job_title}. Description: {job_description}"
-
-    try:
-        client = openai.OpenAI()  # Ny syntax för openai >1.0
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "You are an AI specialized in writing professional job ads."},
-                {"role": "user", "content": prompt}
-            ]
-        )
-        job_ad = response.choices[0].message.content  # Nytt sätt att hämta svaret
-        return jsonify({"jobAd": job_ad})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=10000)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(debug=True, host="0.0.0.0", port=port)

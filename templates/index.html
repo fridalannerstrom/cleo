@@ -18,7 +18,10 @@
                                 <a href="#" class="small">Forgot?</a>
                             </div>
                         </div>
-                        <a href="dashboard" class="btn btn-dark w-100">Sign In</a>
+                        <p>URL: {{ url_for('main_routes.show_page', page='dashboard') }}</p>
+                        <a href="{{ url_for('main_routes.show_page', page='chat') }}">Chat</a>
+                        <a href="{{ url_for('main_routes.show_page', page='test-page') }}">Test Page</a>
+                        <a href="{{ url_for('main_routes.show_page', page='dashboard2') }}" class="btn btn-dark w-100">Sign In</a>
                     </form>
                     <div class="mt-3 text-center">
                         <small>Don't have an account? <a href="#">Sign up</a></small>
