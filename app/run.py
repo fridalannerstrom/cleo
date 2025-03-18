@@ -3,6 +3,8 @@ from flask import Flask, render_template
 from config import Config
 from routes.main_routes import main_routes
 from routes.ai_routes import ai_routes
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
 
 print(f"✅ Flask letar efter templates i: {os.path.abspath('../cleo/templates')}")
 print(f"Flask letar efter templates i: {os.path.abspath('templates')}")
@@ -15,7 +17,17 @@ app.config.from_object(Config)  # Laddar in konfigurationen
 app.register_blueprint(main_routes)
 app.register_blueprint(ai_routes, url_prefix="/api")  # Prefix för API-rutter
 
-print("📌 Registrerade Blueprints:", app.blueprints)
+login_manager = LoginManager()
+login_manager.init_app(app)  # Kopplar login_manager till Flask-appen
+login_manager.login_view = 'login'  # Bestämmer vilken route som användaren ska omdirigeras till om den inte är inloggad
+
+# Skapa en instans av SQLAlchemy
+db = SQLAlchemy(app)
+
+# Den här raden kommer att läsa in databasens URI som vi har satt i config.py
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+
+# Definiera användarmodellen här som vi gjorde tidigare
 
 @app.route('/test-template')
 def test_template():
