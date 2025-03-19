@@ -1,8 +1,8 @@
 import os
 from flask import Flask, render_template
-from config import Config
-from routes.main_routes import main_routes
-from routes.ai_routes import ai_routes
+from .config import Config
+from .routes.main_routes import main_routes
+from .routes.ai_routes import ai_routes
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
